@@ -26,13 +26,13 @@ class IconvTranscoder implements TranscoderInterface
     {
         set_error_handler(
             function ($no, $message) use ($string) {
-                if (1 === preg_match('/Wrong charset, conversion (.+) is/', $message, $matches)) {
+                if (1 === preg_match('/Wrong (charset|encoding), conversion (.+) is/', $message, $matches)) {
                     throw new UnsupportedEncodingException($matches[1], $message);
                 } else {
                     throw new IllegalCharacterException($string, $message);
                 }
             },
-            E_NOTICE | E_USER_NOTICE
+            E_NOTICE | E_USER_NOTICE | E_WARNING
         );
         
         $result = iconv($from, $to ?: $this->defaultEncoding, $string);
