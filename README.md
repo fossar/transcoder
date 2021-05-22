@@ -1,8 +1,8 @@
 Transcoder
 ==========
 
-[![Build Status](https://travis-ci.org/ddeboer/transcoder.svg?branch=master)](https://travis-ci.org/ddeboer/transcoder)
-[![Release](https://img.shields.io/github/release/ddeboer/transcoder.svg?style=flat)](https://packagist.org/packages/ddeboer/transcoder)
+[![Build Status](https://travis-ci.org/fossar/transcoder.svg?branch=master)](https://travis-ci.org/fossar/transcoder)
+[![Release](https://img.shields.io/github/release/fossar/transcoder.svg?style=flat)](https://packagist.org/packages/fossar/transcoder)
 
 Introduction
 ------------
@@ -20,7 +20,7 @@ The recommended way to install the Transcoder library is through
 [Composer](http://getcomposer.org):
 
 ```bash
-$ composer require ddeboer/transcoder
+$ composer require fossar/transcoder
 ```
 
 This command requires you to have Composer installed globally, as explained
