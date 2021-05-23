@@ -24,7 +24,7 @@ class MbTranscoder implements TranscoderInterface
             );
         }
         
-        $this->assertSupported($defaultEncoding);
+        $this->assertSupported($defaultEncoding, false);
         $this->defaultEncoding = $defaultEncoding;
     }
 
@@ -42,7 +42,7 @@ class MbTranscoder implements TranscoderInterface
         }
 
         if ($to) {
-            $this->assertSupported($to);
+            $this->assertSupported($to, false);
         }
 
         $handleErrors = !$from || 'auto' === $from;
@@ -70,15 +70,15 @@ class MbTranscoder implements TranscoderInterface
         return $result;
     }
     
-    private function assertSupported($encoding)
+    private function assertSupported($encoding, $allowAuto = true)
     {
-        if (!$this->isSupported($encoding)) {
+        if (!$this->isSupported($encoding, $allowAuto)) {
             throw new UnsupportedEncodingException($encoding);
         }
     }
     
-    private function isSupported($encoding)
+    private function isSupported($encoding, $allowAuto)
     {
-        return isset(self::$encodings[strtolower($encoding)]);
+        return ($allowAuto && $encoding === 'auto') || isset(self::$encodings[strtolower($encoding)]);
     }
 }
