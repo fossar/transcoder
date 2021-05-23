@@ -8,8 +8,18 @@ use Ddeboer\Transcoder\Exception\UnsupportedEncodingException;
 
 class IconvTranscoder implements TranscoderInterface
 {
+    /**
+     * @var string
+     */
     private $defaultEncoding;
 
+    /**
+     * Create an Iconv-based transcoder.
+     *
+     * @param string $defaultEncoding
+     *
+     * @throws ExtensionMissingException
+     */
     public function __construct($defaultEncoding = 'UTF-8')
     {
         if (!function_exists('iconv')) {

@@ -4,6 +4,10 @@ namespace Ddeboer\Transcoder\Exception;
 
 class UnsupportedEncodingException extends \RuntimeException
 {
+    /**
+     * @param string  $encoding
+     * @param ?string $message
+     */
     public function __construct($encoding, $message = null)
     {
         $error = sprintf('Encoding %s is unsupported on this platform', $encoding);
@@ -11,6 +15,6 @@ class UnsupportedEncodingException extends \RuntimeException
             $error .= ': ' . $message;
         }
 
-        return parent::__construct($error);
+        parent::__construct($error);
     }
 }

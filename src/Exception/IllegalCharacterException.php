@@ -4,6 +4,10 @@ namespace Ddeboer\Transcoder\Exception;
 
 class IllegalCharacterException extends \RuntimeException
 {
+    /**
+     * @param string $string
+     * @param string $warning
+     */
     public function __construct($string, $warning)
     {
         parent::__construct(

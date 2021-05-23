@@ -7,6 +7,7 @@ $rules = [
     '@Symfony' => true,
     // overwrite some Symfony rules
     'concat_space' => ['spacing' => 'one'],
+    'phpdoc_align' => false,
     'yoda_style' => false,
 ];
 

@@ -21,6 +21,9 @@ class TranscoderTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getStrings
+     *
+     * @param string $string
+     * @param string $encoding
      */
     public function testTranscode($string, $encoding)
     {

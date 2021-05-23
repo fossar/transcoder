@@ -8,9 +8,23 @@ use Ddeboer\Transcoder\Exception\UnsupportedEncodingException;
 
 class MbTranscoder implements TranscoderInterface
 {
+    /**
+     * @var array<string, int>
+     */
     private static $encodings;
+
+    /**
+     * @var string
+     */
     private $defaultEncoding;
 
+    /**
+     * Create a Mb-based transcoder.
+     *
+     * @param string $defaultEncoding
+     *
+     * @throws ExtensionMissingException
+     */
     public function __construct($defaultEncoding = 'UTF-8')
     {
         if (!function_exists('mb_convert_encoding')) {
@@ -70,6 +84,14 @@ class MbTranscoder implements TranscoderInterface
         return $result;
     }
 
+    /**
+     * @param string $encoding
+     * @param bool $allowAuto
+     *
+     * @return void
+     *
+     * @throws UnsupportedEncodingException
+     */
     private function assertSupported($encoding, $allowAuto = true)
     {
         if (!$this->isSupported($encoding, $allowAuto)) {
@@ -77,6 +99,12 @@ class MbTranscoder implements TranscoderInterface
         }
     }
 
+    /**
+     * @param string $encoding
+     * @param bool $allowAuto
+     *
+     * @return bool
+     */
     private function isSupported($encoding, $allowAuto)
     {
         return ($allowAuto && $encoding === 'auto') || isset(self::$encodings[strtolower($encoding)]);

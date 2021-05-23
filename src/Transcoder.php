@@ -7,6 +7,9 @@ use Ddeboer\Transcoder\Exception\UnsupportedEncodingException;
 
 class Transcoder implements TranscoderInterface
 {
+    /**
+     * @var array<string, TranscoderInterface>
+     */
     private static $chain;
 
     /**
@@ -14,6 +17,9 @@ class Transcoder implements TranscoderInterface
      */
     private $transcoders = [];
 
+    /**
+     * @param TranscoderInterface[] $transcoders
+     */
     public function __construct(array $transcoders)
     {
         $this->transcoders = $transcoders;
@@ -30,6 +36,10 @@ class Transcoder implements TranscoderInterface
             } catch (UnsupportedEncodingException $e) {
                 // Ignore as long as the fallback transcoder is all right
             }
+        }
+
+        if (!isset($e)) {
+            throw new UnsupportedEncodingException('of any kind', 'No transcoder provided.');
         }
 
         throw $e;
