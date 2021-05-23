@@ -1,7 +1,6 @@
 Transcoder
 ==========
 
-[![Build Status](https://travis-ci.org/fossar/transcoder.svg?branch=master)](https://travis-ci.org/fossar/transcoder)
 [![Release](https://img.shields.io/github/release/fossar/transcoder.svg?style=flat)](https://packagist.org/packages/fossar/transcoder)
 
 Introduction
