@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.1] – 2021-05-23
 
 The project has been revived and is now available under the name [`fossar/transcoder`](https://packagist.org/packages/fossar/transcoder). This is a first release since the fork.
 
@@ -16,4 +16,4 @@ The project has been revived and is now available under the name [`fossar/transc
 - Added Nix expression for easier development and sharing the environment with CI.
 - Switched to GitHub Actions for CI and added more PHP versions.
 
-[Unreleased]: https://github.com/fossar/transcoder/compare/1.0.0...HEAD
+[1.0.1]: https://github.com/fossar/transcoder/compare/1.0.0...v1.0.1
