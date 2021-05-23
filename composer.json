@@ -20,7 +20,8 @@
         "php": ">=5.6.0"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^5.2"
+        "symfony/phpunit-bridge": "^5.2",
+        "friendsofphp/php-cs-fixer": "^2.19"
     },
     "suggest": {
         "ext-mbstring": "For using the MbTranscoder",
@@ -38,6 +39,13 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/simple-phpunit"
+        "cs-check": "php-cs-fixer fix --verbose --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix --verbose --diff",
+        "test": "simple-phpunit"
+    },
+    "scripts-descriptions": {
+        "cs-check": "Check coding style",
+        "cs-fix": "Fix coding style",
+        "test": "Run all tests"
     }
 }
