@@ -61,8 +61,12 @@ class Transcoder implements TranscoderInterface
         try {
             $transcoders[] = new IconvTranscoder($defaultEncoding);
         } catch (ExtensionMissingException $iconv) {
-            // Neither mbstring nor iconv
-            throw $iconv;
+            // Ignore missing iconv extension; hopefully, we have mbstring.
+        }
+
+        // Neither mbstring nor iconv
+        if (count($transcoders) === 0) {
+            throw new ExtensionMissingException('mbstring or iconv');
         }
         
         self::$chain[$defaultEncoding] = new self($transcoders);
