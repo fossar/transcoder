@@ -9,7 +9,7 @@ Introduction
 This is a wrapper around PHP’s `mb_convert_encoding` and `iconv` functions.
 This library adds:
 
-* fallback from `mb` to `iconv` for unknown encodings
+* fallback from `mb` to `iconv` for encodings it does not support
 * conversion of warnings to proper exceptions.
 
 Installation
@@ -31,13 +31,13 @@ Usage
 
 ### Basics
 
-Create the right transcoder for your platform and translate some strings:
+Create the right transcoder for your platform and translate a string to ISO-8859-1 encoding:
 
 ```php
 use Ddeboer\Transcoder\Transcoder;
 
 $transcoder = Transcoder::create();
-$result = $transcoder->transcode('España');
+$result = $transcoder->transcode('España', 'iso-8859-1');
 ```
 
 You can also manually instantiate a transcoder of your liking:
@@ -59,12 +59,18 @@ $transcoder = new IconvTranscoder();
 
 ### Source encoding
 
-By default, the source encoding is detected automatically. However, you get 
-much more reliable results when you specify it explicitly:
+The second argument accepts source encoding and can actually be omitted or passed `null`.
 
 ```php
-$transcoder->transcode('España', 'iso-8859-1');
+$transcoder->transcode('España');
 ```
+
+In that case, however, the behaviour is backend-specific:
+
+- `IconvTranscoder` will use the encoding of the current [locale](https://www.php.net/manual/en/function.setlocale.php) of the process.
+- `MbTranscoder` will try to detect encoding from a list based on the value of [`mbstring.language`](https://www.php.net/manual/en/mbstring.configuration.php#ini.mbstring.language) setting. By default, this tries ASCII, followed by UTF-8. The number of [supported languages](https://github.com/php/php-src/blob/d61d21ad57d04b91a1155153811d16ea982fa106/ext/mbstring/mbstring.c#L88-L147) is limited though and the encoding tables often overlap so the detection might be unreliable.
+
+As you can see, this is mostly useless for western languages. You will get much more reliable results when you specify the source encoding explicitly.
 
 ### Target encoding
 
@@ -83,7 +89,7 @@ Alternatively, specify a target encoding as the third argument in a
 ```php
 use Ddeboer\Transcoder\Transcoder;
 
-$transcoder->transcode('España', null, 'UTF-8'); 
+$transcoder->transcode('España', 'iso-8859-1', 'UTF-8');
 ```
 
 ### Error handling
@@ -99,23 +105,23 @@ use Ddeboer\Transcoder\Exception\UnsupportedEncodingException;
 use Ddeboer\Transcoder\Exception\IllegalCharacterException;
 
 $input = 'España';
- 
-try {
-    $transcoder->transcode($input);
-} catch (UndetectableEncodingException $e) {
-    // Failed to automatically detect $input’s encoding 
-}
 
 try {
-    $transcoder->transcode($input, null, 'not-a-real-encoding');
+    $transcoder->transcode($input, 'utf-8', 'not-a-real-encoding');
 } catch (UnsupportedEncodingException $e) {
     // ‘not-a-real-encoding’ is an unsupported encoding 
 }
 
 try {
-    $transcoder->transcode('Illegal quotes: ‘ ’', null, 'iso-8859-1');
+    $transcoder->transcode('Illegal quotes: ‘ ’', 'utf-8', 'iso-8859-1');
 } catch (IllegalCharacterException $e) {
     // Curly quotes ‘ ’ are illegal in ISO-8859-1
+}
+
+try {
+    $transcoder->transcode($input);
+} catch (UndetectableEncodingException $e) {
+    // Failed to automatically detect $input’s encoding (mb) or not a valid string in current locale locale (iconv)
 }
 ```
 

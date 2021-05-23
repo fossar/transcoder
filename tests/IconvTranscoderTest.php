@@ -32,13 +32,14 @@ class IconvTranscoderTest extends \PHPUnit\Framework\TestCase
     
     public function testDetectEncoding()
     {
-        $this->transcoder->transcode('España', null, 'iso-8859-1');
+        $isoLatin1 = $this->transcoder->transcode('España', null, 'iso-8859-1');
+        $this->assertEquals($isoLatin1, "Espa\xf1a");
     }
 
     public function testTranscodeIllegalCharacter()
     {
         $this->expectException(\Ddeboer\Transcoder\Exception\IllegalCharacterException::class);
-        $this->transcoder->transcode('“', null, 'iso-8859-1');
+        $this->transcoder->transcode('“', 'utf-8', 'iso-8859-1');
     }
 
     /**
@@ -46,7 +47,7 @@ class IconvTranscoderTest extends \PHPUnit\Framework\TestCase
      */
     public function testTranscode($string, $encoding)
     {
-        $result = $this->transcoder->transcode($string, null, $encoding);
+        $result = $this->transcoder->transcode($string, 'utf-8', $encoding);
         $this->assertEquals($string, $this->transcoder->transcode($result, $encoding));
     }
     

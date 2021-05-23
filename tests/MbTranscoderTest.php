@@ -30,13 +30,21 @@ class MbTranscoderTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(\Ddeboer\Transcoder\Exception\UnsupportedEncodingException::class);
         $this->expectExceptionMessage('bad-encoding');
-        $this->transcoder->transcode('bla', null, 'bad-encoding');
+        $this->transcoder->transcode('bla', 'utf-8', 'bad-encoding');
     }
     
     public function testDetectEncoding()
     {
-        $result = $this->transcoder->transcode('España', null, 'iso-8859-1');
-        $this->transcoder->transcode($result);
+        $oldLanguage = ini_get('mbstring.language');
+        ini_set('mbstring.language', 'ru');
+
+        $utf8 = "пирожки";
+        $this->assertEquals($utf8, $this->transcoder->transcode($utf8));
+
+        $koi8r = $this->transcoder->transcode($utf8, 'utf-8', 'koi8-r');
+        $this->assertEquals($utf8, $this->transcoder->transcode($koi8r));
+
+        ini_set('mbstring.language', $oldLanguage);
     }
     
     public function testUndetectableEncoding()
