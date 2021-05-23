@@ -10,7 +10,7 @@ class MbTranscoderTest extends \PHPUnit\Framework\TestCase
      * @var MbTranscoder
      */
     private $transcoder;
-    
+
     /**
      * @before
      */
@@ -32,13 +32,13 @@ class MbTranscoderTest extends \PHPUnit\Framework\TestCase
         $this->expectExceptionMessage('bad-encoding');
         $this->transcoder->transcode('bla', 'utf-8', 'bad-encoding');
     }
-    
+
     public function testDetectEncoding()
     {
         $oldLanguage = ini_get('mbstring.language');
         ini_set('mbstring.language', 'ru');
 
-        $utf8 = "пирожки";
+        $utf8 = 'пирожки';
         $this->assertEquals($utf8, $this->transcoder->transcode($utf8));
 
         $koi8r = $this->transcoder->transcode($utf8, 'utf-8', 'koi8-r');
@@ -46,7 +46,7 @@ class MbTranscoderTest extends \PHPUnit\Framework\TestCase
 
         ini_set('mbstring.language', $oldLanguage);
     }
-    
+
     public function testUndetectableEncoding()
     {
         $this->expectException(\Ddeboer\Transcoder\Exception\UndetectableEncodingException::class);
@@ -67,12 +67,12 @@ class MbTranscoderTest extends \PHPUnit\Framework\TestCase
         $result = $this->transcoder->transcode($string, null, $encoding);
         $this->assertEquals($string, $this->transcoder->transcode($result, $encoding));
     }
-    
+
     public function getStrings()
     {
         return [
             ['‘España’', 'windows-1252'],
-            ['España', 'iso-8859-1']
+            ['España', 'iso-8859-1'],
         ];
     }
 }

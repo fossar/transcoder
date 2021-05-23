@@ -1,33 +1,25 @@
-Transcoder
-==========
+# Transcoder
 
 [![Release](https://img.shields.io/github/release/fossar/transcoder.svg?style=flat)](https://packagist.org/packages/fossar/transcoder)
 
-Introduction
-------------
+## Introduction
 
-This is a wrapper around PHP’s `mb_convert_encoding` and `iconv` functions.
-This library adds:
+This is a wrapper around PHP’s `mb_convert_encoding` and `iconv` functions. This library adds:
 
-* fallback from `mb` to `iconv` for encodings it does not support
-* conversion of warnings to proper exceptions.
+- fallback from `mb` to `iconv` for encodings it does not support
+- conversion of warnings to proper exceptions.
 
-Installation
-------------
+## Installation
 
-The recommended way to install the Transcoder library is through 
-[Composer](http://getcomposer.org):
+The recommended way to install the Transcoder library is through [Composer](http://getcomposer.org):
 
 ```bash
 $ composer require fossar/transcoder
 ```
 
-This command requires you to have Composer installed globally, as explained
-in the [installation chapter](https://getcomposer.org/doc/00-intro.md)
-of the Composer documentation.
+This command requires you to have Composer installed globally, as explained in the [installation chapter](https://getcomposer.org/doc/00-intro.md) of the Composer documentation.
 
-Usage
------
+## Usage
 
 ### Basics
 
@@ -46,7 +38,6 @@ You can also manually instantiate a transcoder of your liking:
 use Ddeboer\Transcoder\MbTranscoder;
 
 $transcoder = new MbTranscoder();
-
 ```
 
 Or:
@@ -75,16 +66,14 @@ As you can see, this is mostly useless for western languages. You will get much 
 ### Target encoding
 
 Specify a default target encoding as the first argument to `create()`:
- 
 
 ```php
 use Ddeboer\Transcoder\Transcoder;
 
 $isoTranscoder = Transcoder::create('iso-8859-1');
 ```
- 
-Alternatively, specify a target encoding as the third argument in a 
-`transcode()` call:
+
+Alternatively, specify a target encoding as the third argument in a `transcode()` call:
 
 ```php
 use Ddeboer\Transcoder\Transcoder;
@@ -94,10 +83,7 @@ $transcoder->transcode('España', 'iso-8859-1', 'UTF-8');
 
 ### Error handling
 
-PHP’s `mv_convert_encoding` and `iconv` are inconvenient to use because they 
-generate notices and warnings instead of proper exceptions. This library fixes
-that:
-
+PHP’s `mv_convert_encoding` and `iconv` are inconvenient to use because they generate notices and warnings instead of proper exceptions. This library fixes that:
 
 ```php
 use Ddeboer\Transcoder\Exception\UndetectableEncodingException;
@@ -109,7 +95,7 @@ $input = 'España';
 try {
     $transcoder->transcode($input, 'utf-8', 'not-a-real-encoding');
 } catch (UnsupportedEncodingException $e) {
-    // ‘not-a-real-encoding’ is an unsupported encoding 
+    // ‘not-a-real-encoding’ is an unsupported encoding
 }
 
 try {
@@ -127,17 +113,10 @@ try {
 
 ### Transcoder fallback
 
-In general, `mb_convert_encoding` is faster than `iconv`. However, as `iconv`
-supports more encodings than `mb_convert_encoding`, it makes sense to combine 
-the two. 
+In general, `mb_convert_encoding` is faster than `iconv`. However, as `iconv` supports more encodings than `mb_convert_encoding`, it makes sense to combine the two.
 
 So, the Transcoder returned from `create()`:
 
-* uses `mb_convert_encoding` if the 
-  [mbstring](http://php.net/manual/en/book.mbstring.php) PHP extension is 
-  installed;
-* if not, it uses `iconv` instead if the 
-  [iconv](http://php.net/manual/en/book.iconv.php) extension is installed; 
-* if both the mbstring and iconv extension are available, the Transcoder will 
-  first try `mb_convert_encoding` and fall back to `iconv`.
-  
+- uses `mb_convert_encoding` if the [mbstring](http://php.net/manual/en/book.mbstring.php) PHP extension is installed;
+- if not, it uses `iconv` instead if the [iconv](http://php.net/manual/en/book.iconv.php) extension is installed;
+- if both the mbstring and iconv extension are available, the Transcoder will first try `mb_convert_encoding` and fall back to `iconv`.

@@ -10,20 +10,20 @@ class MbTranscoder implements TranscoderInterface
 {
     private static $encodings;
     private $defaultEncoding;
-    
+
     public function __construct($defaultEncoding = 'UTF-8')
     {
         if (!function_exists('mb_convert_encoding')) {
             throw new ExtensionMissingException('mb');
         }
-        
+
         if (null === self::$encodings) {
             self::$encodings = array_change_key_case(
                 array_flip(mb_list_encodings()),
                 CASE_LOWER
             );
         }
-        
+
         $this->assertSupported($defaultEncoding, false);
         $this->defaultEncoding = $defaultEncoding;
     }
@@ -35,7 +35,7 @@ class MbTranscoder implements TranscoderInterface
     {
         if ($from) {
             if (is_array($from)) {
-                array_map(array($this, 'assertSupported'), $from);
+                array_map([$this, 'assertSupported'], $from);
             } else {
                 $this->assertSupported($from);
             }
@@ -69,14 +69,14 @@ class MbTranscoder implements TranscoderInterface
 
         return $result;
     }
-    
+
     private function assertSupported($encoding, $allowAuto = true)
     {
         if (!$this->isSupported($encoding, $allowAuto)) {
             throw new UnsupportedEncodingException($encoding);
         }
     }
-    
+
     private function isSupported($encoding, $allowAuto)
     {
         return ($allowAuto && $encoding === 'auto') || isset(self::$encodings[strtolower($encoding)]);

@@ -10,7 +10,7 @@ class UnsupportedEncodingException extends \RuntimeException
         if ($message) {
             $error .= ': ' . $message;
         }
-        
+
         return parent::__construct($error);
     }
 }

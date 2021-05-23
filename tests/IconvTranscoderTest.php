@@ -10,7 +10,7 @@ class IconvTranscoderTest extends \PHPUnit\Framework\TestCase
      * @var IconvTranscoder
      */
     private $transcoder;
-    
+
     /**
      * @before
      */
@@ -22,14 +22,14 @@ class IconvTranscoderTest extends \PHPUnit\Framework\TestCase
         // This file uses UTF-8 so we have to set the locale accordingly.
         $this->setLocale(\LC_ALL, 'C.UTF-8');
     }
-    
+
     public function testTranscodeUnsupportedFromEncoding()
     {
         $this->expectException(\Ddeboer\Transcoder\Exception\UnsupportedEncodingException::class);
         $this->expectExceptionMessage('bad-encoding');
         $this->transcoder->transcode('bla', 'bad-encoding');
     }
-    
+
     public function testDetectEncoding()
     {
         $isoLatin1 = $this->transcoder->transcode('España', null, 'iso-8859-1');
@@ -50,11 +50,11 @@ class IconvTranscoderTest extends \PHPUnit\Framework\TestCase
         $result = $this->transcoder->transcode($string, 'utf-8', $encoding);
         $this->assertEquals($string, $this->transcoder->transcode($result, $encoding));
     }
-    
+
     public function getStrings()
     {
         return [
-            ['España', 'iso-8859-1']
+            ['España', 'iso-8859-1'],
         ];
     }
 }
