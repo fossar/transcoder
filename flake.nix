@@ -49,7 +49,7 @@
             php
             phpBase.packages.composer
 
-            phpBase.packages.php-cs-fixer-2
+            phpBase.packages.php-cs-fixer
           ];
         };
       };
