@@ -45,11 +45,13 @@
     "scripts": {
         "cs-check": "php-cs-fixer fix --verbose --dry-run --diff",
         "cs-fix": "php-cs-fixer fix --verbose --diff",
+        "phpstan": "phpstan analyze",
         "test": "simple-phpunit"
     },
     "scripts-descriptions": {
         "cs-check": "Check coding style",
         "cs-fix": "Fix coding style",
+        "phpstan": "Fix coding style",
         "test": "Run all tests"
     }
 }

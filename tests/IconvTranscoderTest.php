@@ -53,10 +53,9 @@ class IconvTranscoderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($string, $this->transcoder->transcode($result, $encoding));
     }
 
-    public function getStrings()
+    /** @return iterable<array{string, string}> */
+    public function getStrings(): iterable
     {
-        return [
-            ['España', 'iso-8859-1'],
-        ];
+        yield ['España', 'iso-8859-1'];
     }
 }

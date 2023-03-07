@@ -38,6 +38,7 @@ class MbTranscoderTest extends \PHPUnit\Framework\TestCase
     public function testDetectEncoding(): void
     {
         $oldLanguage = ini_get('mbstring.language');
+        assert($oldLanguage !== false);
         ini_set('mbstring.language', 'ru');
 
         $utf8 = 'пирожки';
@@ -70,11 +71,10 @@ class MbTranscoderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($string, $this->transcoder->transcode($result, $encoding));
     }
 
-    public function getStrings()
+    /** @return iterable<array{string, string}> */
+    public function getStrings(): iterable
     {
-        return [
-            ['‘España’', 'windows-1252'],
-            ['España', 'iso-8859-1'],
-        ];
+        yield ['‘España’', 'windows-1252'];
+        yield ['España', 'iso-8859-1'];
     }
 }

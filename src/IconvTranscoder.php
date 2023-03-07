@@ -47,6 +47,7 @@ class IconvTranscoder implements TranscoderInterface
 
         try {
             $result = iconv($from ?? '', $to ?? $this->defaultEncoding, $string);
+            assert($result !== false); // For PHPStan, ensured by error handler.
         } finally {
             restore_error_handler();
         }

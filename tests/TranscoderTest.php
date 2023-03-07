@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Ddeboer\Transcoder\Tests;
 
 use Ddeboer\Transcoder\Transcoder;
+use Ddeboer\Transcoder\TranscoderInterface;
 
 class TranscoderTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var Transcoder
+     * @var TranscoderInterface
      */
     private $transcoder;
 
@@ -30,11 +31,10 @@ class TranscoderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($string, $this->transcoder->transcode($result, $encoding));
     }
 
-    public function getStrings()
+    /** @return iterable<array{string, string}> */
+    public function getStrings(): iterable
     {
-        return [
-            ['España', 'UTF-8'],
-            ['bla', 'windows-1257'], // Encoding only supported by iconv
-        ];
+        yield ['España', 'UTF-8'];
+        yield ['bla', 'windows-1257']; // Encoding only supported by iconv
     }
 }
