@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ddeboer\Transcoder\Tests;
 
 use Ddeboer\Transcoder\Transcoder;
@@ -14,18 +16,15 @@ class TranscoderTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function doSetUp()
+    protected function doSetUp(): void
     {
         $this->transcoder = Transcoder::create();
     }
 
     /**
      * @dataProvider getStrings
-     *
-     * @param string $string
-     * @param string $encoding
      */
-    public function testTranscode($string, $encoding)
+    public function testTranscode(string $string, string $encoding): void
     {
         $result = $this->transcoder->transcode($string, 'UTF-8', $encoding);
         $this->assertEquals($string, $this->transcoder->transcode($result, $encoding));

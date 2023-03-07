@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 - Iconv: Fix warning on PHP 8.2 when passing `null` as source encoding.
 - Raise minimum PHP version to 7.2.5.
+- Add parameter and return type hints.
 
 
 ## [1.0.1] – 2021-05-23

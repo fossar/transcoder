@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ddeboer\Transcoder\Tests;
 
 use Ddeboer\Transcoder\MbTranscoder;
@@ -14,26 +16,26 @@ class MbTranscoderTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function doSetUp()
+    protected function doSetUp(): void
     {
         $this->transcoder = new MbTranscoder();
     }
 
-    public function testTranscodeUnsupportedFromEncoding()
+    public function testTranscodeUnsupportedFromEncoding(): void
     {
         $this->expectException(\Ddeboer\Transcoder\Exception\UnsupportedEncodingException::class);
         $this->expectExceptionMessage('bad-encoding');
         $this->transcoder->transcode('bla', 'bad-encoding');
     }
 
-    public function testTranscodeUnsupportedToEncoding()
+    public function testTranscodeUnsupportedToEncoding(): void
     {
         $this->expectException(\Ddeboer\Transcoder\Exception\UnsupportedEncodingException::class);
         $this->expectExceptionMessage('bad-encoding');
         $this->transcoder->transcode('bla', 'utf-8', 'bad-encoding');
     }
 
-    public function testDetectEncoding()
+    public function testDetectEncoding(): void
     {
         $oldLanguage = ini_get('mbstring.language');
         ini_set('mbstring.language', 'ru');
@@ -47,7 +49,7 @@ class MbTranscoderTest extends \PHPUnit\Framework\TestCase
         ini_set('mbstring.language', $oldLanguage);
     }
 
-    public function testUndetectableEncoding()
+    public function testUndetectableEncoding(): void
     {
         $this->expectException(\Ddeboer\Transcoder\Exception\UndetectableEncodingException::class);
         $this->expectExceptionMessage('is undetectable');
@@ -61,11 +63,8 @@ class MbTranscoderTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getStrings
-     *
-     * @param string $string
-     * @param string $encoding
      */
-    public function testTranscode($string, $encoding)
+    public function testTranscode(string $string, string $encoding): void
     {
         $result = $this->transcoder->transcode($string, null, $encoding);
         $this->assertEquals($string, $this->transcoder->transcode($result, $encoding));

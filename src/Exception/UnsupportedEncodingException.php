@@ -1,17 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ddeboer\Transcoder\Exception;
 
 class UnsupportedEncodingException extends \RuntimeException
 {
-    /**
-     * @param string  $encoding
-     * @param ?string $message
-     */
-    public function __construct($encoding, $message = null)
+    public function __construct(string $encoding, ?string $message = null)
     {
         $error = sprintf('Encoding %s is unsupported on this platform', $encoding);
-        if ($message) {
+        if ($message !== null) {
             $error .= ': ' . $message;
         }
 

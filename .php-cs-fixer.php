@@ -5,6 +5,10 @@ $finder = PhpCsFixer\Finder::create()
 
 $rules = [
     '@Symfony' => true,
+    '@PHP71Migration' => true,
+    '@PHP71Migration:risky' => true,
+    'phpdoc_to_param_type' => true,
+    'phpdoc_to_return_type' => true,
     // overwrite some Symfony rules
     'concat_space' => ['spacing' => 'one'],
     'phpdoc_align' => false,

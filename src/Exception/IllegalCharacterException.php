@@ -1,14 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ddeboer\Transcoder\Exception;
 
 class IllegalCharacterException extends \RuntimeException
 {
-    /**
-     * @param string $string
-     * @param string $warning
-     */
-    public function __construct($string, $warning)
+    public function __construct(string $string, string $warning)
     {
         parent::__construct(
             sprintf(

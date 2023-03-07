@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ddeboer\Transcoder\Tests;
 
 use Ddeboer\Transcoder\IconvTranscoder;
@@ -14,7 +16,7 @@ class IconvTranscoderTest extends \PHPUnit\Framework\TestCase
     /**
      * @before
      */
-    protected function doSetUp()
+    protected function doSetUp(): void
     {
         $this->transcoder = new IconvTranscoder();
         // Passing null (empty encoding name) to iconv makes it detect encoding from locale.
@@ -23,20 +25,20 @@ class IconvTranscoderTest extends \PHPUnit\Framework\TestCase
         $this->setLocale(\LC_ALL, 'C.UTF-8');
     }
 
-    public function testTranscodeUnsupportedFromEncoding()
+    public function testTranscodeUnsupportedFromEncoding(): void
     {
         $this->expectException(\Ddeboer\Transcoder\Exception\UnsupportedEncodingException::class);
         $this->expectExceptionMessage('bad-encoding');
         $this->transcoder->transcode('bla', 'bad-encoding');
     }
 
-    public function testDetectEncoding()
+    public function testDetectEncoding(): void
     {
         $isoLatin1 = $this->transcoder->transcode('España', null, 'iso-8859-1');
         $this->assertEquals($isoLatin1, "Espa\xf1a");
     }
 
-    public function testTranscodeIllegalCharacter()
+    public function testTranscodeIllegalCharacter(): void
     {
         $this->expectException(\Ddeboer\Transcoder\Exception\IllegalCharacterException::class);
         $this->transcoder->transcode('“', 'utf-8', 'iso-8859-1');
@@ -44,11 +46,8 @@ class IconvTranscoderTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getStrings
-     *
-     * @param string $string
-     * @param string $encoding
      */
-    public function testTranscode($string, $encoding)
+    public function testTranscode(string $string, string $encoding): void
     {
         $result = $this->transcoder->transcode($string, 'utf-8', $encoding);
         $this->assertEquals($string, $this->transcoder->transcode($result, $encoding));

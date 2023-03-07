@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ddeboer\Transcoder;
 
 use Ddeboer\Transcoder\Exception\ExtensionMissingException;
@@ -28,7 +30,7 @@ class Transcoder implements TranscoderInterface
     /**
      * {@inheritdoc}
      */
-    public function transcode($string, $from = null, $to = null)
+    public function transcode(string $string, ?string $from = null, ?string $to = null): string
     {
         foreach ($this->transcoders as $transcoder) {
             try {
@@ -48,13 +50,9 @@ class Transcoder implements TranscoderInterface
     /**
      * Create a transcoder.
      *
-     * @param string $defaultEncoding
-     *
-     * @return TranscoderInterface
-     *
      * @throws ExtensionMissingException
      */
-    public static function create($defaultEncoding = 'UTF-8')
+    public static function create(string $defaultEncoding = 'UTF-8'): TranscoderInterface
     {
         if (isset(self::$chain[$defaultEncoding])) {
             return self::$chain[$defaultEncoding];

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ddeboer\Transcoder;
 
 use Ddeboer\Transcoder\Exception\ExtensionMissingException;
@@ -16,11 +18,9 @@ class IconvTranscoder implements TranscoderInterface
     /**
      * Create an Iconv-based transcoder.
      *
-     * @param string $defaultEncoding
-     *
      * @throws ExtensionMissingException
      */
-    public function __construct($defaultEncoding = 'UTF-8')
+    public function __construct(string $defaultEncoding = 'UTF-8')
     {
         if (!function_exists('iconv')) {
             throw new ExtensionMissingException('iconv');
@@ -32,10 +32,10 @@ class IconvTranscoder implements TranscoderInterface
     /**
      * {@inheritdoc}
      */
-    public function transcode($string, $from = null, $to = null)
+    public function transcode(string $string, ?string $from = null, ?string $to = null): string
     {
         set_error_handler(
-            function ($no, $message) use ($string) {
+            function (int $no, string $message) use ($string): void {
                 if (1 === preg_match('/Wrong (charset|encoding), conversion (.+) is/', $message, $matches)) {
                     throw new UnsupportedEncodingException($matches[1], $message);
                 } else {
@@ -46,7 +46,7 @@ class IconvTranscoder implements TranscoderInterface
         );
 
         try {
-            $result = iconv($from ?: '', $to ?: $this->defaultEncoding, $string);
+            $result = iconv($from ?? '', $to ?? $this->defaultEncoding, $string);
         } finally {
             restore_error_handler();
         }
