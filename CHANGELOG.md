@@ -2,6 +2,11 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## unreleased
+
+- Iconv: Fix warning on PHP 8.2 when passing `null` as source encoding.
+
+
 ## [1.0.1] – 2021-05-23
 
 The project has been revived and is now available under the name [`fossar/transcoder`](https://packagist.org/packages/fossar/transcoder). This is a first release since the fork.
