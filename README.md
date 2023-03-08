@@ -1,6 +1,6 @@
 # Transcoder
 
-[![Release](https://img.shields.io/github/release/fossar/transcoder.svg?style=flat)](https://packagist.org/packages/fossar/transcoder)
+[![Packagist Version](https://img.shields.io/packagist/v/fossar/transcoder)](https://packagist.org/packages/fossar/transcoder)
 
 ## Introduction
 
