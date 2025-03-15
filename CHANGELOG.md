@@ -2,6 +2,11 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] – unreleased
+
+- Mb: Make encoding detection stricter.
+
+
 ## [2.0.0] – 2023-03-07
 
 - Iconv: Fix warning on PHP 8.2 when passing `null` as source encoding.
@@ -23,5 +28,6 @@ The project has been revived and is now available under the name [`fossar/transc
 - Added Nix expression for easier development and sharing the environment with CI.
 - Switched to GitHub Actions for CI and added more PHP versions.
 
-[2.0.0]: https://github.com/fossar/transcoder/compare/1.0.1...v2.0.0
+[3.0.0]: https://github.com/fossar/transcoder/compare/v2.0.0...v3.0.0
+[2.0.0]: https://github.com/fossar/transcoder/compare/v1.0.1...v2.0.0
 [1.0.1]: https://github.com/fossar/transcoder/compare/1.0.0...v1.0.1

@@ -55,33 +55,30 @@ class MbTranscoder implements TranscoderInterface
             } else {
                 $this->assertSupported($from);
             }
+        } else {
+            $from = 'auto';
         }
 
         if ($to) {
             $this->assertSupported($to, false);
         }
 
-        $handleErrors = !$from || 'auto' === $from;
-        if ($handleErrors) {
-            set_error_handler(
-                function ($no, $warning) use ($string): void {
-                    throw new UndetectableEncodingException($string, $warning);
-                },
-                E_WARNING
-            );
+        if ($from === 'auto') {
+            $from = mb_detect_encoding($string, 'auto', true);
         }
 
-        try {
-            $result = mb_convert_encoding(
-                $string,
-                $to ?: $this->defaultEncoding,
-                $from ?: 'auto'
-            );
-        } finally {
-            if ($handleErrors) {
-                restore_error_handler();
-            }
+        if ($from === false) {
+            throw new UndetectableEncodingException($string, 'Unable to detect character encoding');
         }
+
+        $result = mb_convert_encoding(
+            $string,
+            $to ?: $this->defaultEncoding,
+            $from
+        );
+
+        // For PHPStan: We check the encoding is valid.
+        assert($result !== false);
 
         return $result;
     }

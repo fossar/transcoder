@@ -55,7 +55,7 @@ class MbTranscoderTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Ddeboer\Transcoder\Exception\UndetectableEncodingException::class);
         $this->expectExceptionMessage('is undetectable');
         $result = $this->transcoder->transcode(
-            '‘curly quotes make this incompatible with 1252’',
+            '‘Windows-1252 encodes curly quotes as 0x91 and 0x92, which are indistinguishable from any other single-byte encoding’',
             null,
             'windows-1252'
         );
