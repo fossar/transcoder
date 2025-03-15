@@ -72,9 +72,6 @@ class MbTranscoder implements TranscoderInterface
             $from
         );
 
-        // For PHPStan: We check the encoding is valid.
-        assert($result !== false);
-
         return $result;
     }
 
