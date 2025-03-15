@@ -50,6 +50,10 @@
             phpBase.packages.composer
             pkgs.phpactor
           ];
+
+          env = pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+            LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
+          };
         };
       };
 }
