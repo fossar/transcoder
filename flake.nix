@@ -48,6 +48,7 @@
             # Composer and PHP.
             php
             phpBase.packages.composer
+            pkgs.phpactor
           ];
         };
       };
