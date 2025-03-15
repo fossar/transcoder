@@ -29,9 +29,6 @@ class IconvTranscoder implements TranscoderInterface
         $this->defaultEncoding = $defaultEncoding;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transcode(string $string, ?string $from = null, ?string $to = null): string
     {
         set_error_handler(

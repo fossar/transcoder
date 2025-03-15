@@ -5,9 +5,9 @@ $finder = PhpCsFixer\Finder::create()
 
 $rules = [
     '@Symfony' => true,
-    '@PHP71Migration' => true,
-    '@PHP71Migration:risky' => true,
-    'phpdoc_to_param_type' => true,
+    '@PHP74Migration' => true,
+    '@PHP74Migration:risky' => true,
+    // 'phpdoc_to_param_type' => true, // requires PHP 8.0
     'phpdoc_to_return_type' => true,
     // overwrite some Symfony rules
     'concat_space' => ['spacing' => 'one'],

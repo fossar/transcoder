@@ -17,7 +17,7 @@
         "ddeboer/transcoder": "self.version"
     },
     "require": {
-        "php": ">=7.2.5"
+        "php": ">=7.4.0"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^6.2 || ^7.0",
@@ -36,7 +36,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.2.5"
+            "php": "7.4.0"
         }
     },
     "scripts": {

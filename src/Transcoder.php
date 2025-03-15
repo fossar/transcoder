@@ -27,9 +27,6 @@ class Transcoder implements TranscoderInterface
         $this->transcoders = $transcoders;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transcode(string $string, ?string $from = null, ?string $to = null): string
     {
         foreach ($this->transcoders as $transcoder) {

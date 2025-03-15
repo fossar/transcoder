@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## [3.0.0] – unreleased
 
 - Mb: Make encoding detection stricter.
+- Raise minimum PHP version to 7.4.0.
 
 
 ## [2.0.0] – 2023-03-07

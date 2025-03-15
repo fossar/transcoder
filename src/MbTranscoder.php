@@ -43,8 +43,6 @@ class MbTranscoder implements TranscoderInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param array<string>|string|null $from
      */
     public function transcode(string $string, $from = null, ?string $to = null): string
