@@ -7,6 +7,7 @@ $rules = [
     '@Symfony' => true,
     '@PHP74Migration' => true,
     '@PHP74Migration:risky' => true,
+    'phpdoc_to_property_type' => true,
     // 'phpdoc_to_param_type' => true, // requires PHP 8.0
     'phpdoc_to_return_type' => true,
     // overwrite some Symfony rules

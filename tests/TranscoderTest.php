@@ -9,10 +9,7 @@ use Ddeboer\Transcoder\TranscoderInterface;
 
 class TranscoderTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var TranscoderInterface
-     */
-    private $transcoder;
+    private TranscoderInterface $transcoder;
 
     /**
      * @before

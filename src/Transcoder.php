@@ -12,12 +12,12 @@ class Transcoder implements TranscoderInterface
     /**
      * @var array<string, TranscoderInterface>
      */
-    private static $chain;
+    private static array $chain;
 
     /**
      * @var TranscoderInterface[]
      */
-    private $transcoders = [];
+    private array $transcoders = [];
 
     /**
      * @param TranscoderInterface[] $transcoders

@@ -8,10 +8,7 @@ use Ddeboer\Transcoder\IconvTranscoder;
 
 class IconvTranscoderTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var IconvTranscoder
-     */
-    private $transcoder;
+    private IconvTranscoder $transcoder;
 
     /**
      * @before

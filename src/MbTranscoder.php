@@ -13,12 +13,9 @@ class MbTranscoder implements TranscoderInterface
     /**
      * @var array<string, int>
      */
-    private static $encodings;
+    private static array $encodings;
 
-    /**
-     * @var string
-     */
-    private $defaultEncoding;
+    private string $defaultEncoding;
 
     /**
      * Create a Mb-based transcoder.
@@ -31,7 +28,7 @@ class MbTranscoder implements TranscoderInterface
             throw new ExtensionMissingException('mb');
         }
 
-        if (null === self::$encodings) {
+        if (!isset(self::$encodings)) {
             self::$encodings = array_change_key_case(
                 array_flip(mb_list_encodings()),
                 CASE_LOWER

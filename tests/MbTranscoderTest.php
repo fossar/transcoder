@@ -8,10 +8,7 @@ use Ddeboer\Transcoder\MbTranscoder;
 
 class MbTranscoderTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var MbTranscoder
-     */
-    private $transcoder;
+    private MbTranscoder $transcoder;
 
     /**
      * @before

@@ -10,10 +10,7 @@ use Ddeboer\Transcoder\Exception\UnsupportedEncodingException;
 
 class IconvTranscoder implements TranscoderInterface
 {
-    /**
-     * @var string
-     */
-    private $defaultEncoding;
+    private string $defaultEncoding;
 
     /**
      * Create an Iconv-based transcoder.
