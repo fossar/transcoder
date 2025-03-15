@@ -48,9 +48,6 @@
             # Composer and PHP.
             php
             phpBase.packages.composer
-
-            phpBase.packages.php-cs-fixer
-            phpBase.packages.phpstan
           ];
         };
       };
