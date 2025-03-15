@@ -1,2 +1,5 @@
 composer.lock
-vendor
+vendor/
+.direnv/
+.php-cs-fixer.cache
+.phpunit.result.cache
